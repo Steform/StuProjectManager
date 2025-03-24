@@ -1,7 +1,7 @@
-🛠️ StuProjectManager
+# 🛠️ StuProjectManager
 StuProjectManager is a simple web application for managing a list of projects with a name, link, description, and custom favicon.
 
-🚀 Features
+## 🚀 Features
 Add, edit, and delete projects.
 
 Store data in an SQLite database.
@@ -10,7 +10,7 @@ Upload and manage project favicons.
 
 Simple Bootstrap-based UI.
 
-🏗️ Installation
+## 🏗️ Installation
 Clone the repository
 
 ```bash
@@ -26,15 +26,10 @@ php -S localhost:8000
 
 Then open http://localhost:8000 in your browser.
 
-🛠️ Configuration
+## 🛠️ Configuration
 Database: The SQLite file (projets.db) is created automatically.
 
 Favicon folder: Ensure the ./favicon/ directory is writable (chmod 755 favicon).
-
-📸 Preview
-
-🔒 Security & Possible Improvements
-Add stricter input validation.
 
 
 📜 License
