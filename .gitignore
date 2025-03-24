@@ -1,0 +1,5 @@
+# Ignore the favicon folder
+/favicon/
+
+# Ignore the SQLite database file
+projects.db
