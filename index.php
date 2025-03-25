@@ -63,11 +63,14 @@ function validate_url($url) {
 }
 
 // Initialize alert message variables for feedback to the user
-$alertMessage = "";
-$alertType = "";
+$alertMessage = $_SESSION['alertMessage'] ?? "";
+$alertType = $_SESSION['alertType'] ?? "";
+unset($_SESSION['alertMessage'], $_SESSION['alertType']);
+
 
 // Handle the form submission (POST request)
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nom'], $_POST['lien'])) {
+
     $nom = trim($_POST['nom']); // Get the project name from the form input
     $lien = trim($_POST['lien']); // Get the project link from the form input
     $description = isset($_POST['description']) ? trim($_POST['description']) : null; // Get the optional description
@@ -110,6 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nom'], $_POST['lien']
 
     // Check if required fields are filled in and validate the URL
     if (!empty($nom) && validate_url($lien)) {
+        
         try {
             // If an ID is provided, update the existing project
             if (isset($_POST['id']) && is_numeric($_POST['id'])) {
@@ -119,24 +123,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nom'], $_POST['lien']
                 $stmt->bindValue(3, $description);
                 $stmt->bindValue(4, $faviconPath);
                 $stmt->bindValue(5, $_POST['id'], SQLITE3_INTEGER);
-                $alertMessage = "Project updated successfully!";
+                $_SESSION['alertMessage'] = "Project updated successfully!";
             } else {
+                
                 // Insert a new project into the database
                 $stmt = $conn->prepare("INSERT INTO projets (nom, lien, description, favicon) VALUES (?, ?, ?, ?)");
                 $stmt->bindValue(1, $nom);
                 $stmt->bindValue(2, $lien);
                 $stmt->bindValue(3, $description);
                 $stmt->bindValue(4, $faviconPath);
-                $alertMessage = "Project added successfully!";
+                $_SESSION['alertMessage'] = "Project added successfully!";
             }
             $stmt->execute(); // Execute the SQL statement
-            $alertType = "success"; // Set the alert type to success for feedback
+            $_SESSION['alertType'] = "success"; // Set the alert type to success for feedback
+
         } catch (Exception $e) {
             // Catch any database errors and display an error message
-            $alertMessage = "Error during the operation: " . $e->getMessage();
-            $alertType = "danger"; // Set the alert type to danger
+            $_SESSION['alertMessage'] = "Error during the operation: " . $e->getMessage();
+            $_SESSION['alertType'] = "danger";
         }
+    } else {
+        $_SESSION['alertMessage'] = "Invalid data. Please check your inputs.";
+        $_SESSION['alertType'] = "warning";
     }
+
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit;
+
 }
 
 // Handle project deletion (GET request)
@@ -146,13 +159,16 @@ if (isset($_GET['delete']) && is_numeric($_GET['delete'])) {
         $stmt = $conn->prepare("DELETE FROM projets WHERE id = ?");
         $stmt->bindValue(1, $_GET['delete'], SQLITE3_INTEGER);
         $stmt->execute(); // Execute the delete statement
-        $alertMessage = "Project deleted successfully!";
-        $alertType = "warning"; // Set the alert type to warning for deletion feedback
-    } catch (Exception $e) {
-        // Catch any errors and display an error message
-        $alertMessage = "Error during deletion: " . $e->getMessage();
-        $alertType = "danger"; // Set the alert type to danger
+        $_SESSION['alertMessage'] = "Project deleted successfully!";
+        $_SESSION['alertType'] = "warning"; // Set the alert type to warning for deletion feedback
+    }  catch (Exception $e) {
+        $_SESSION['alertMessage'] = "Error during deletion: " . $e->getMessage();
+        $_SESSION['alertType'] = "danger";
     }
+
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit;
+
 }
 
 // Fetch all projects from the database
@@ -212,6 +228,19 @@ while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
             </div>
         </form>
     </div>
+
+    <div class="container">
+    <div class="row">
+        <div class="col-12">
+            <?php if (!empty($alertMessage)){ ?>
+                <div class="alert alert-<?= htmlspecialchars($alertType, ENT_QUOTES, 'UTF-8') ?> alert-dismissible fade show" role="alert">
+                    <?= htmlspecialchars($alertMessage, ENT_QUOTES, 'UTF-8') ?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            <?php } ?>
+        </div>
+    </div>
+</div>
 
     <div class="container">
         <div class="row">
@@ -276,6 +305,17 @@ while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
             document.getElementById('lien').value = lien;
             document.getElementById('description').value = description;
         }
+
+        document.addEventListener("DOMContentLoaded", function () {
+        var closeButtons = document.querySelectorAll(".alert .btn-close");
+
+        closeButtons.forEach(function (button) {
+            button.addEventListener("click", function () {
+                this.parentElement.remove();
+            });
+        });
+    });
+
     </script>
 </body>
 </html>
