@@ -2,4 +2,8 @@
 /favicon/
 
 # Ignore the SQLite database file
+<<<<<<< HEAD
 projets.db
+=======
+projects.db
+>>>>>>> parent of e8e5448 (Config: Ignoring database)
