@@ -64,13 +64,18 @@ class CategoryController {
                 $_SESSION['alertType'] = 'success';
                 header('Location: ?controller=project&action=list');
                 exit;
+            } else {
+                // En cas d'erreur, on stocke l'erreur dans la session et on redirige
+                $_SESSION['alertMessage'] = $error;
+                $_SESSION['alertType'] = 'danger';
+                $_SESSION['openCategoryModal'] = true; // Pour rouvrir la modale côté JS si besoin
+                header('Location: ?controller=project&action=list');
+                exit;
             }
         }
-        ob_start();
-        if (isset($error)) echo '<div class="alert alert-danger">' . htmlspecialchars($error) . '</div>';
-        echo '<h2>Category Form</h2>';
-        $content = ob_get_clean();
-        include __DIR__ . '/../views/layout.php';
+        // Plus de rendu direct de vue catégorie
+        header('Location: ?controller=project&action=list');
+        exit;
     }
 
     /**
