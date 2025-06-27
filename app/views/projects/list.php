@@ -26,7 +26,11 @@ $filteredProjects = array_filter($projects, function($p) use ($activeCategoryId)
 
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h1>Project Management</h1>
-    <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#categoryModal">Manage categories</button>
+    <div class="btn-group" role="group" aria-label="Project actions">
+        <a href="?controller=project&action=backup" class="btn btn-outline-primary" id="backup-btn" type="button">Backup</a>
+        <a href="?controller=project&action=restore" class="btn btn-outline-success ms-2" id="restore-btn" type="button">Restore</a>
+        <button class="btn btn-secondary ms-2" data-bs-toggle="modal" data-bs-target="#categoryModal">Manage categories</button>
+    </div>
 </div>
 
 <!-- Project creation/edit form -->

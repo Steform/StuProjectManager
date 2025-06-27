@@ -1,3 +1,12 @@
+/**
+ * @file Database.php
+ * @brief Database connection and migration logic for the application (SQLite).
+ *
+ * Handles connection, schema migration, and integrity setup.
+ *
+ * @author Your Name
+ * @date 2024
+ */
 <?php
 /**
  * Class Database
@@ -19,9 +28,16 @@ class Database {
             self::$db = new SQLite3(self::$dbFile);
             self::$db->enableExceptions(true);
             self::$db->exec('PRAGMA foreign_keys = ON;');
+            if (file_exists(self::$dbFile)) {
+                chmod(self::$dbFile, 0666);
+            }
             self::migrate(); // on garde ce nom
         }
         return self::$db;
+    }
+
+    public static function resetConnection() {
+        self::$db = null;
     }
 
     private static function logMigration($message) {
@@ -77,3 +93,4 @@ class Database {
         self::logMigration('--- Migration finished ---');
     }
 }
+ 

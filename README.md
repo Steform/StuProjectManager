@@ -1,4 +1,4 @@
-# 🛠️ StuProjectManager v0.2
+# 🛠️ StuProjectManager v0.3
 
 ## 📦 Requirements & Installation
 
@@ -30,6 +30,30 @@ Then open [http://localhost:8000](http://localhost:8000) in your browser.
 - Store data in an SQLite database
 - Upload and manage project and category favicons
 - Simple, accessible Bootstrap-based UI
+
+## 💾 Backup & Restore
+
+You can easily backup and restore all your projects, categories, and favicons using the built-in backup/restore features.
+
+### Backup
+- Click the **Backup** button at the top right of the main page.
+- This will download a ZIP archive containing:
+  - All projects (`projects.json`)
+  - All categories (`categories.json`)
+  - All favicons (in a `favicons/` folder)
+
+### Restore
+- Click the **Restore** button at the top right of the main page.
+- Upload a previously downloaded backup ZIP file.
+- The application will:
+  - Backup your current database and favicons (with a timestamped copy)
+  - Restore all projects, categories, and favicons from the ZIP
+  - Automatically migrate the database schema if needed
+
+**Note:**
+- The restore operation will overwrite all current data (projects, categories, favicons) with the contents of the backup.
+- If the database schema has changed, the app will auto-migrate to ensure compatibility.
+- Backups are portable between different versions of the app (as long as the schema is compatible, for this version v0.2 and v0.3 is compatible, v0.1 are not).
 
 ## 📚 Documentation (Doxygen)
 This project uses [Doxygen](https://www.doxygen.nl/) to generate developer documentation from PHP docblocks.

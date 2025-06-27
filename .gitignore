@@ -9,3 +9,10 @@ docs/html/
 docs/latex/
 logs/
 vendor/
+
+# Sauvegardes favicons
+public/favicon-*/*.*
+!public/favicon/favicon.png
+
+# Sauvegardes bases SQLite
+projects-*.db

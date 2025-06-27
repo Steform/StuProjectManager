@@ -1,3 +1,12 @@
+/**
+ * @file Project.php
+ * @brief Model for handling project data and database operations.
+ *
+ * Provides static methods for CRUD operations on projects.
+ *
+ * @author Your Name
+ * @date 2024
+ */
 <?php
 /**
  * Class Project

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Calque_1" data-name="Calque 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490.5 518">
+  <defs>
+    <style>
+      .cls-1, .cls-2, .cls-3 {
+        fill: #fff;
+      }
+
+      .cls-4 {
+        fill: #f8f8f8;
+      }
+
+      .cls-4, .cls-5, .cls-6, .cls-7, .cls-2, .cls-3, .cls-8 {
+        stroke-miterlimit: 10;
+      }
+
+      .cls-4, .cls-6, .cls-7, .cls-2 {
+        stroke: #131a27;
+        stroke-width: 12px;
+      }
+
+      .cls-5 {
+        stroke: red;
+      }
+
+      .cls-5, .cls-6 {
+        fill: red;
+      }
+
+      .cls-9 {
+        fill: #a1b2ba;
+      }
+
+      .cls-7 {
+        fill: none;
+      }
+
+      .cls-10 {
+        fill: #b0c2c9;
+      }
+
+      .cls-11 {
+        fill: #131a27;
+      }
+
+      .cls-3 {
+        stroke: #aaa;
+      }
+
+      .cls-8 {
+        fill: #000de9;
+        stroke: #000de9;
+      }
+    </style>
+  </defs>
+  <rect class="cls-4" x="400" y="241" width="65" height="98" rx="13.24" ry="13.24"/>
+  <rect class="cls-4" x="6" y="244" width="65" height="98" rx="13.24" ry="13.24"/>
+  <path class="cls-9" d="m400,311v15.22c0,3.75,3.04,6.78,6.78,6.78h45.43c3.75,0,6.78-3.04,6.78-6.78v-15.22h-59Z"/>
+  <path class="cls-9" d="m12,314v15.22c0,3.75,3.04,6.78,6.78,6.78h45.43c3.75,0,6.78-3.04,6.78-6.78v-15.22H12Z"/>
+  <g>
+    <ellipse class="cls-4" cx="238.5" cy="457.1" rx="191.5" ry="54.9"/>
+    <path class="cls-4" d="m433.5,253.38c0-110.12-87.75-199.38-196-199.38S41.5,143.27,41.5,253.38c0,.64.02,1.28.02,1.93h-.02l.5,129.55,13.26,41.73c7.74,30.51,82.81,58.44,184.24,58.44s181.73-25.51,184.19-57.28l10.31-43.86h0l-.5-128.59h-.02c0-.64.02-1.28.02-1.93Z"/>
+  </g>
+  <ellipse class="cls-10" cx="237.5" cy="295.5" rx="185.5" ry="162.5"/>
+  <ellipse class="cls-2" cx="237.5" cy="285.5" rx="178.5" ry="154.5"/>
+  <ellipse class="cls-11" cx="236" cy="286" rx="160" ry="140"/>
+  <ellipse class="cls-1" cx="150.5" cy="236.5" rx="22.5" ry="19.5"/>
+  <circle class="cls-1" cx="183.5" cy="199.5" r="10.5"/>
+  <circle class="cls-1" cx="120.5" cy="279.5" r="9.5"/>
+  <circle class="cls-11" cx="112.5" cy="436.5" r="7.5"/>
+  <ellipse class="cls-11" cx="94" cy="427.5" rx="5" ry="6.5"/>
+  <circle class="cls-11" cx="112.5" cy="436.5" r="7.5"/>
+  <ellipse class="cls-11" cx="94" cy="427.5" rx="5" ry="6.5"/>
+  <g>
+    <circle class="cls-11" cx="362.5" cy="437.5" r="7.5"/>
+    <ellipse class="cls-11" cx="381" cy="428.5" rx="5" ry="6.5"/>
+  </g>
+  <circle class="cls-11" cx="112.5" cy="436.5" r="7.5"/>
+  <ellipse class="cls-11" cx="94" cy="427.5" rx="5" ry="6.5"/>
+  <g>
+    <g>
+      <path class="cls-3" d="m188,116.71c15.27-4.23,31.69-6.54,48.78-6.54,16.14,0,31.67,2.06,46.22,5.85v-34.52c-13.96-3.47-28.82-5.34-44.22-5.34-17.84,0-34.94,2.51-50.78,7.1v33.44Z"/>
+      <path class="cls-5" d="m283,116.03c18.3,4.77,35.03,12.3,49.41,21.97h36.74c-18.16-26.75-49.01-47.27-86.14-56.49v34.52Z"/>
+    </g>
+    <path class="cls-8" d="m132.84,144.5c15.54-12.29,34.5-21.86,55.66-27.72v-33.44c-37.06,10.75-67.19,32.93-83.62,61.16h27.97Z"/>
+  </g>
+  <line class="cls-7" x1="459.5" y1="243.5" x2="458.5" y2="63.5"/>
+  <circle class="cls-6" cx="458.5" cy="32" r="26"/>
+</svg>

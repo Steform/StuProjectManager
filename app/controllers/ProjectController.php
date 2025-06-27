@@ -316,4 +316,37 @@ class ProjectController {
         header('Location: ?controller=project&action=list#project-list');
         exit;
     }
+
+    public function backup() {
+        require_once __DIR__ . '/../helpers/BackupHelper.php';
+        \BackupHelper::backupAndDownload();
+    }
+
+    public function restore() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            try {
+                require_once __DIR__ . '/../helpers/RestoreHelper.php';
+                \RestoreHelper::restoreFromUpload();
+                $_SESSION['alertMessage'] = 'Restoration completed successfully!';
+                $_SESSION['alertType'] = 'success';
+            } catch (\Exception $e) {
+                $_SESSION['alertMessage'] = 'Restore failed: ' . $e->getMessage();
+                $_SESSION['alertType'] = 'danger';
+            }
+            header('Location: ?controller=project&action=list');
+            exit;
+        } else {
+            // Affiche le formulaire d'upload
+            ob_start();
+            echo '<h2>Restore backup</h2>';
+            echo '<form method="post" enctype="multipart/form-data">';
+            echo '<div class="mb-3"><label for="restore_zip" class="form-label">Backup zip file</label>';
+            echo '<input type="file" name="restore_zip" id="restore_zip" class="form-control" accept="application/zip" required></div>';
+            echo '<button type="submit" class="btn btn-success">Restore</button>';
+            echo ' <a href="?controller=project&action=list" class="btn btn-secondary ms-2">Cancel</a>';
+            echo '</form>';
+            $content = ob_get_clean();
+            include __DIR__ . '/../views/layout.php';
+        }
+    }
 } 
