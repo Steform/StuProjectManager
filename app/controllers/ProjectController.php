@@ -1,3 +1,12 @@
+/**
+ * @file ProjectController.php
+ * @brief Controller for project management (CRUD, backup, restore).
+ *
+ * Handles all project-related HTTP requests and business logic.
+ *
+ * @author Your Name
+ * @date 2024
+ */
 <?php
 require_once __DIR__ . '/../models/Project.php';
 require_once __DIR__ . '/../models/Category.php';
