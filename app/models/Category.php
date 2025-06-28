@@ -1,13 +1,13 @@
+<?php
 /**
  * @file Category.php
  * @brief Model for handling category data and database operations.
  *
  * Provides static methods for CRUD operations on categories.
  *
- * @author Your Name
- * @date 2024
+ * @author Stunivers
+ * @date 2025-06-28
  */
-<?php
 /**
  * Class Category
  * Handles category data and database operations.

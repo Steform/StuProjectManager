@@ -6,8 +6,8 @@
  * This helper provides a static method to restore all projects, categories, and favicons from a backup zip archive.
  * It handles database migration, backup of existing data, and extraction of all necessary files.
  *
- * @author Your Name
- * @date 2024
+ * @author Stunivers
+ * @date 2025-06-28
  */
 class RestoreHelper {
     public static function restoreFromUpload() {

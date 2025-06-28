@@ -1,13 +1,14 @@
+<?php
 /**
  * @file CategoryController.php
  * @brief Controller for category management (CRUD).
  *
  * Handles all category-related HTTP requests and business logic.
  *
- * @author Your Name
- * @date 2024
+ * @author Stunivers
+ * @date 2025-06-28
  */
-<?php
+
 require_once __DIR__ . '/../models/Category.php';
 require_once __DIR__ . '/../models/Database.php';
 

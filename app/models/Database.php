@@ -1,13 +1,13 @@
+<?php
 /**
  * @file Database.php
  * @brief Database connection and migration logic for the application (SQLite).
  *
  * Handles connection, schema migration, and integrity setup.
  *
- * @author Your Name
- * @date 2024
+ * @author Stunivers
+ * @date 2025-06-28
  */
-<?php
 /**
  * Class Database
  * Handles the SQLite database connection and minimal setup.

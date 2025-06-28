@@ -96,6 +96,8 @@ $formAction = '?controller=project&action=list' . ($editing ? '&edit_id=' . $edi
 })();
 </script>
 
+
+
 <!-- Bootstrap tabs for categories -->
 <ul class="nav nav-tabs mb-3" id="categoryTabs" role="tablist">
     <?php foreach ($categoryList as $cat): ?>

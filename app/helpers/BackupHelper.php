@@ -6,8 +6,8 @@
  * This helper provides a static method to export all projects, categories, and favicons from the database
  * and the favicon directory into a single zip archive for backup purposes.
  *
- * @author Your Name
- * @date 2024
+ * @author Stunivers
+ * @date 2025-06-28
  */
 class BackupHelper {
     public static function backupAndDownload() {
