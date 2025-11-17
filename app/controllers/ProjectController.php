@@ -11,6 +11,7 @@
 
 require_once __DIR__ . '/../models/Project.php';
 require_once __DIR__ . '/../models/Category.php';
+require_once __DIR__ . '/../helpers/FaviconHelper.php';
 
 class ProjectController {
     /**
@@ -82,11 +83,22 @@ class ProjectController {
             }
             // Si pas d'erreur, on crée ou update
             if (!$error) {
+                // If no favicon provided, try to fetch it from the website
+                if (!$faviconPath) {
+                    if ($id) {
+                        // On update, garder l'ancien favicon s'il existe
+                        $faviconPath = $editProject['favicon'] ?? null;
+                    }
+                    // Si toujours pas de favicon, essayer de le récupérer du site
+                    if (!$faviconPath) {
+                        $faviconPath = FaviconHelper::fetchFavicon($link);
+                    }
+                }
                 $data = [
                     'name' => $name,
                     'link' => $link,
                     'description' => $description,
-                    'favicon' => $faviconPath ?? ($id ? ($editProject['favicon'] ?? null) : null),
+                    'favicon' => $faviconPath,
                     'category_id' => $category_id
                 ];
                 if ($id) {
@@ -184,6 +196,10 @@ class ProjectController {
             }
             // If no error, create the project
             if (!$error) {
+                // If no favicon provided, try to fetch it from the website
+                if (!$faviconPath) {
+                    $faviconPath = FaviconHelper::fetchFavicon($link);
+                }
                 $data = [
                     'name' => $name,
                     'link' => $link,
@@ -283,6 +299,14 @@ class ProjectController {
             }
             // If no error, update the project
             if (!$error) {
+                // If no new favicon uploaded, try to fetch it from the website (only if no existing favicon)
+                $hasNewFavicon = isset($_FILES['favicon']) && $_FILES['favicon']['error'] !== UPLOAD_ERR_NO_FILE;
+                if (!$hasNewFavicon && empty($project['favicon'])) {
+                    $fetchedFavicon = FaviconHelper::fetchFavicon($link);
+                    if ($fetchedFavicon) {
+                        $faviconPath = $fetchedFavicon;
+                    }
+                }
                 $data = [
                     'name' => $name,
                     'link' => $link,
