@@ -49,8 +49,8 @@ $formAction = '?controller=project&action=list' . ($editing ? '&edit_id=' . $edi
         </div>
         <div class="col-5"><label for="link" class="form-label">Project Link</label></div>
         <div class="col-7">
-            <input type="url" name="link" id="link" class="form-control" required maxlength="255" pattern="https?://.+" value="<?= htmlspecialchars($editing ? $editProject['link'] : '', ENT_QUOTES, 'UTF-8') ?>">
-            <div class="invalid-feedback">Please enter a valid URL (starting with http:// or https://).</div>
+            <input type="url" name="link" id="link" class="form-control" required maxlength="255" pattern="(https?|ftp)://.+" value="<?= htmlspecialchars($editing ? $editProject['link'] : '', ENT_QUOTES, 'UTF-8') ?>">
+            <div class="invalid-feedback">Please enter a valid URL (starting with http://, https://, or ftp://).</div>
         </div>
         <div class="col-5"><label for="description" class="form-label">Description</label></div>
         <div class="col-7">

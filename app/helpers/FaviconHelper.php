@@ -22,7 +22,7 @@ class FaviconHelper {
      * @param string $url The website URL to fetch favicon from
      * @return string|null The relative path to the saved favicon, or null if failed
      * 
-     * @input string $url - The website URL (must be valid http:// or https://)
+     * @input string $url - The website URL (must be valid http:// or https://, FTP URLs are not supported)
      * @output string|null - Relative path to saved favicon (e.g., '/favicon/abc123.png') or null on failure
      * @date 2025-01-17
      * @creator Stephane H.
@@ -34,6 +34,11 @@ class FaviconHelper {
 
         $parsedUrl = parse_url($url);
         if (!$parsedUrl || !isset($parsedUrl['scheme']) || !isset($parsedUrl['host'])) {
+            return null;
+        }
+
+        // Don't try to fetch favicon for FTP links
+        if (isset($parsedUrl['scheme']) && strtolower($parsedUrl['scheme']) === 'ftp') {
             return null;
         }
 

@@ -29,9 +29,10 @@ Then open [http://localhost:8000](http://localhost:8000) in your browser.
 - Organize projects by category
 - **Custom display order** for categories (control the order of category tabs)
 - **Custom display order** for projects (control the order of projects within each category)
+- **Support for multiple link types**: HTTP, HTTPS, and FTP protocols
 - Store data in an SQLite database
 - Upload and manage project and category favicons
-- Automatic favicon fetching from project URLs
+- Automatic favicon fetching from project URLs (HTTP/HTTPS only)
 - Simple, accessible Bootstrap-based UI
 
 ## 💾 Backup & Restore
@@ -108,7 +109,7 @@ You should see output indicating the number of tests and assertions.
 
 ![Screenshot](docs/capture.png)
 
-- Add a new project with a name, link, description, category, display order, and favicon.
+- Add a new project with a name, link (HTTP, HTTPS, or FTP), description, category, display order, and favicon.
 - Filter projects by category using the tabs (ordered by display order).
 - Projects within each category are displayed in the order specified by their display order field.
 - Manage categories (add, edit, delete) via the modal dialog accessible from the main project page.
@@ -139,11 +140,22 @@ Both categories and projects support a **display order** field that controls the
 - You can see the current display order of categories in the category management modal.
 - The display order is preserved during backup/restore operations.
 
+### Project links
+
+Projects support multiple link protocols:
+
+- **HTTP** (`http://`): Standard web links
+- **HTTPS** (`https://`): Secure web links
+- **FTP** (`ftp://`): File Transfer Protocol links
+
+**Note**: Automatic favicon fetching is only available for HTTP and HTTPS links. FTP links will not attempt to fetch a favicon automatically, but you can still upload a favicon manually.
+
 ## 📋 Changelog
 
 ### v0.4 (Current)
 - ✨ Added custom display order for categories (control tab order)
 - ✨ Added custom display order for projects (control list order within categories)
+- 🔗 Added support for FTP links in addition to HTTP/HTTPS
 - 🔄 Automatic database migration for existing installations
 - 📦 Backups now include display order information
 

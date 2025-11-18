@@ -47,8 +47,8 @@ class ProjectController {
             // Validation
             if ($name === '' || strlen($name) < 2 || strlen($name) > 100 || !preg_match('/^[A-Za-z0-9 _\-]+$/', $name)) {
                 $error = 'Project name must be 2-100 characters (letters, numbers, spaces, - or _).';
-            } elseif ($link === '' || strlen($link) > 255 || !preg_match('/^https?:\/\/.+/', $link)) {
-                $error = 'Project link must be a valid URL (starting with http:// or https://).';
+            } elseif ($link === '' || strlen($link) > 255 || !preg_match('/^(https?|ftp):\/\/.+/', $link)) {
+                $error = 'Project link must be a valid URL (starting with http://, https://, or ftp://).';
             } elseif (strlen($description) > 500) {
                 $error = 'Description must be less than 500 characters.';
             } elseif (empty($category_id) || !in_array($category_id, array_column($categoryList, 'id'))) {
@@ -158,8 +158,8 @@ class ProjectController {
                 $error = 'Project name must be 2-100 characters (letters, numbers, spaces, - or _).';
             }
             // Validate project link
-            elseif ($link === '' || strlen($link) > 255 || !preg_match('/^https?:\/\/.+/', $link)) {
-                $error = 'Project link must be a valid URL (starting with http:// or https://).';
+            elseif ($link === '' || strlen($link) > 255 || !preg_match('/^(https?|ftp):\/\/.+/', $link)) {
+                $error = 'Project link must be a valid URL (starting with http://, https://, or ftp://).';
             }
             // Validate description
             elseif (strlen($description) > 500) {
@@ -263,8 +263,8 @@ class ProjectController {
                 $error = 'Project name must be 2-100 characters (letters, numbers, spaces, - or _).';
             }
             // Validate project link
-            elseif ($link === '' || strlen($link) > 255 || !preg_match('/^https?:\/\/.+/', $link)) {
-                $error = 'Project link must be a valid URL (starting with http:// or https://).';
+            elseif ($link === '' || strlen($link) > 255 || !preg_match('/^(https?|ftp):\/\/.+/', $link)) {
+                $error = 'Project link must be a valid URL (starting with http://, https://, or ftp://).';
             }
             // Validate description
             elseif (strlen($description) > 500) {
