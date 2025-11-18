@@ -1,4 +1,4 @@
-# 🛠️ StuProjectManager v0.3
+# 🛠️ StuProjectManager v0.4
 
 ## 📦 Requirements & Installation
 
@@ -27,8 +27,11 @@ Then open [http://localhost:8000](http://localhost:8000) in your browser.
 ## 🚀 Features
 - Add, edit, and delete projects
 - Organize projects by category
+- **Custom display order** for categories (control the order of category tabs)
+- **Custom display order** for projects (control the order of projects within each category)
 - Store data in an SQLite database
 - Upload and manage project and category favicons
+- Automatic favicon fetching from project URLs
 - Simple, accessible Bootstrap-based UI
 
 ## 💾 Backup & Restore
@@ -53,7 +56,7 @@ You can easily backup and restore all your projects, categories, and favicons us
 **Note:**
 - The restore operation will overwrite all current data (projects, categories, favicons) with the contents of the backup.
 - If the database schema has changed, the app will auto-migrate to ensure compatibility.
-- Backups are portable between different versions of the app (as long as the schema is compatible, for this version v0.2 and v0.3 is compatible, v0.1 are not).
+- Backups are portable between different versions of the app (as long as the schema is compatible, for this version v0.2, v0.3, and v0.4 are compatible, v0.1 are not).
 
 ## 📚 Documentation (Doxygen)
 This project uses [Doxygen](https://www.doxygen.nl/) to generate developer documentation from PHP docblocks.
@@ -105,9 +108,12 @@ You should see output indicating the number of tests and assertions.
 
 ![Screenshot](docs/capture.png)
 
-- Add a new project with a name, link, description, category, and favicon.
-- Filter projects by category using the tabs.
+- Add a new project with a name, link, description, category, display order, and favicon.
+- Filter projects by category using the tabs (ordered by display order).
+- Projects within each category are displayed in the order specified by their display order field.
 - Manage categories (add, edit, delete) via the modal dialog accessible from the main project page.
+- Set custom display order for categories to control the tab order (lower numbers appear first).
+- Set custom display order for projects to control their position in the list (lower numbers appear first).
 - Delete or edit existing projects from the list.
 
 ### Editing workflow
@@ -115,13 +121,46 @@ You should see output indicating the number of tests and assertions.
 - **Edit a project:**
   - Click the ✏️ button next to the project you want to edit in the project list.
   - The project form at the top of the page will switch to edit mode, pre-filled with the project data.
-  - Make your changes and click "Update". Click "Cancel" to exit edit mode.
+  - Make your changes (including display order) and click "Update". Click "Cancel" to exit edit mode.
 
 - **Edit a category:**
   - Click the "Manage categories" button to open the modal dialog.
   - In the modal, click the ✏️ button next to the category you want to edit.
   - The category form in the modal will switch to edit mode, pre-filled with the category data.
-  - Make your changes and click "Update". Click "Cancel" to exit edit mode.
+  - Make your changes (including display order) and click "Update". Click "Cancel" to exit edit mode.
+
+### Display order
+
+Both categories and projects support a **display order** field that controls their position:
+
+- **Categories**: The display order determines the order of the category tabs. Categories with lower numbers appear first (0 = first position).
+- **Projects**: The display order determines the order of projects within each category. Projects with lower numbers appear first (0 = first position).
+- When creating a new item, the display order defaults to 0.
+- You can see the current display order of categories in the category management modal.
+- The display order is preserved during backup/restore operations.
+
+## 📋 Changelog
+
+### v0.4 (Current)
+- ✨ Added custom display order for categories (control tab order)
+- ✨ Added custom display order for projects (control list order within categories)
+- 🔄 Automatic database migration for existing installations
+- 📦 Backups now include display order information
+
+### v0.3
+- 💾 Backup and restore functionality
+- 🔄 Automatic database schema migration
+- 📁 Favicon management improvements
+
+### v0.2
+- 🎨 Bootstrap-based UI
+- 📂 Category management
+- 🔗 Project linking to categories
+
+### v0.1
+- 🚀 Initial release
+- 📝 Basic project CRUD operations
+- 🗄️ SQLite database support
 
 ## 🤝 Contributing
 
