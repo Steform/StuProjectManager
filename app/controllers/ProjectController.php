@@ -94,12 +94,14 @@ class ProjectController {
                         $faviconPath = FaviconHelper::fetchFavicon($link);
                     }
                 }
+                $sortOrder = isset($_POST['sort_order']) ? intval($_POST['sort_order']) : 0;
                 $data = [
                     'name' => $name,
                     'link' => $link,
                     'description' => $description,
                     'favicon' => $faviconPath,
-                    'category_id' => $category_id
+                    'category_id' => $category_id,
+                    'sort_order' => $sortOrder
                 ];
                 if ($id) {
                     Project::update($id, $data);
@@ -114,13 +116,15 @@ class ProjectController {
                 exit;
             } else {
                 // On garde les valeurs saisies pour le formulaire
+                $sortOrder = isset($_POST['sort_order']) ? intval($_POST['sort_order']) : 0;
                 $editProject = [
                     'id' => $id,
                     'name' => $name,
                     'link' => $link,
                     'description' => $description,
                     'favicon' => $faviconPath ?? ($id ? ($editProject['favicon'] ?? null) : null),
-                    'category_id' => $category_id
+                    'category_id' => $category_id,
+                    'sort_order' => $sortOrder
                 ];
             }
         }
@@ -200,12 +204,14 @@ class ProjectController {
                 if (!$faviconPath) {
                     $faviconPath = FaviconHelper::fetchFavicon($link);
                 }
+                $sortOrder = isset($_POST['sort_order']) ? intval($_POST['sort_order']) : 0;
                 $data = [
                     'name' => $name,
                     'link' => $link,
                     'description' => $description,
                     'favicon' => $faviconPath,
-                    'category_id' => $category_id
+                    'category_id' => $category_id,
+                    'sort_order' => $sortOrder
                 ];
                 Project::create($data);
                 $_SESSION['alertMessage'] = 'Project added successfully!';
@@ -307,6 +313,7 @@ class ProjectController {
                         $faviconPath = $fetchedFavicon;
                     }
                 }
+                $sortOrder = isset($_POST['sort_order']) ? intval($_POST['sort_order']) : null;
                 $data = [
                     'name' => $name,
                     'link' => $link,
@@ -314,6 +321,9 @@ class ProjectController {
                     'favicon' => $faviconPath,
                     'category_id' => $category_id
                 ];
+                if ($sortOrder !== null) {
+                    $data['sort_order'] = $sortOrder;
+                }
                 Project::update($id, $data);
                 $_SESSION['alertMessage'] = 'Project updated successfully!';
                 $_SESSION['alertType'] = 'success';
@@ -321,11 +331,13 @@ class ProjectController {
                 exit;
             } else {
                 // On garde les valeurs saisies pour le formulaire
+                $sortOrder = isset($_POST['sort_order']) ? intval($_POST['sort_order']) : ($project['sort_order'] ?? 0);
                 $project = array_merge($project, [
                     'name' => $name,
                     'link' => $link,
                     'description' => $description,
-                    'category_id' => $category_id
+                    'category_id' => $category_id,
+                    'sort_order' => $sortOrder
                 ]);
             }
         }

@@ -65,9 +65,11 @@ class CategoryController {
             }
             // If no error, create the category
             if (!$error) {
+                $sortOrder = isset($_POST['cat_sort_order']) ? intval($_POST['cat_sort_order']) : 0;
                 $data = [
                     'name' => $name,
-                    'favicon' => $faviconPath
+                    'favicon' => $faviconPath,
+                    'sort_order' => $sortOrder
                 ];
                 Category::create($data);
                 $_SESSION['alertMessage'] = 'Category added successfully!';
@@ -145,10 +147,14 @@ class CategoryController {
             }
             // Si pas d'erreur, on update
             if (!isset($_SESSION['alertMessage'])) {
+                $sortOrder = isset($_POST['cat_sort_order']) ? intval($_POST['cat_sort_order']) : null;
                 $data = [
                     'name' => $name,
                     'favicon' => $faviconPath ?? null
                 ];
+                if ($sortOrder !== null) {
+                    $data['sort_order'] = $sortOrder;
+                }
                 Category::update($id, $data);
                 $_SESSION['alertMessage'] = 'Category updated successfully!';
                 $_SESSION['alertType'] = 'success';

@@ -37,6 +37,11 @@ if (!isset($categoryList)) $categoryList = [];
             </select>
             <div class="invalid-feedback">Please select a category.</div>
         </div>
+        <div class="col-5"><label for="sort_order" class="form-label">Display order</label></div>
+        <div class="col-7">
+            <input type="number" name="sort_order" id="sort_order" class="form-control" min="0" value="<?= htmlspecialchars($project['sort_order'] ?? 0, ENT_QUOTES, 'UTF-8') ?>">
+            <small class="form-text text-muted">Lower numbers appear first in the list (0 = first position)</small>
+        </div>
         <div class="col-5"><label for="favicon" class="form-label">Favicon (Image file)</label></div>
         <div class="col-7">
             <input type="file" name="favicon" id="favicon" class="form-control" accept="image/png,image/jpeg,image/gif,image/x-icon,image/svg+xml,image/vnd.microsoft.icon">

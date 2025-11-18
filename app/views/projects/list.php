@@ -66,6 +66,11 @@ $formAction = '?controller=project&action=list' . ($editing ? '&edit_id=' . $edi
             </select>
             <div class="invalid-feedback">Please select a category.</div>
         </div>
+        <div class="col-5"><label for="sort_order" class="form-label">Display order</label></div>
+        <div class="col-7">
+            <input type="number" name="sort_order" id="sort_order" class="form-control" min="0" value="<?= htmlspecialchars($editing ? ($editProject['sort_order'] ?? 0) : 0, ENT_QUOTES, 'UTF-8') ?>">
+            <small class="form-text text-muted">Lower numbers appear first in the list (0 = first position)</small>
+        </div>
         <div class="col-5"><label for="favicon" class="form-label">Favicon (Image file)</label></div>
         <div class="col-7">
             <input type="file" name="favicon" id="favicon" class="form-control" accept="image/png,image/jpeg,image/gif,image/x-icon,image/svg+xml,image/vnd.microsoft.icon">
@@ -167,6 +172,11 @@ $formAction = '?controller=project&action=list' . ($editing ? '&edit_id=' . $edi
             <input type="text" class="form-control" id="cat_name" name="cat_name" required>
           </div>
           <div class="mb-3">
+            <label for="cat_sort_order" class="form-label">Display order</label>
+            <input type="number" class="form-control" id="cat_sort_order" name="cat_sort_order" min="0" value="0">
+            <small class="form-text text-muted">Lower numbers appear first in tabs (0 = first position)</small>
+          </div>
+          <div class="mb-3">
             <label for="cat_favicon" class="form-label">Favicon</label>
             <input type="file" class="form-control" id="cat_favicon" name="cat_favicon">
             <div id="current-favicon" class="mt-2" style="display:none;"></div>
@@ -184,12 +194,13 @@ $formAction = '?controller=project&action=list' . ($editing ? '&edit_id=' . $edi
               <?php else: ?>
                 <img src="/favicon/favicon.png" alt="Favicon" style="width:24px;height:24px;margin-right:8px;">
               <?php endif; ?>
-              <span><?= htmlspecialchars($cat['name'], ENT_QUOTES, 'UTF-8') ?></span>
+              <span><?= htmlspecialchars($cat['name'], ENT_QUOTES, 'UTF-8') ?> <small class="text-muted">(Order: <?= htmlspecialchars($cat['sort_order'] ?? 0, ENT_QUOTES, 'UTF-8') ?>)</small></span>
               <span>
                 <button type="button" class="btn btn-sm btn-warning me-1 edit-category-btn"
                   data-id="<?= $cat['id'] ?>"
                   data-name="<?= htmlspecialchars($cat['name'], ENT_QUOTES, 'UTF-8') ?>"
                   data-favicon="<?= htmlspecialchars($cat['favicon'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
+                  data-sort-order="<?= htmlspecialchars($cat['sort_order'] ?? 0, ENT_QUOTES, 'UTF-8') ?>"
                   >✏️</button>
                 <a href="?controller=category&action=delete&id=<?= $cat['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Delete this category?')">🗑️</a>
               </span>
@@ -209,10 +220,12 @@ $formAction = '?controller=project&action=list' . ($editing ? '&edit_id=' . $edi
       var id = this.getAttribute('data-id');
       var name = this.getAttribute('data-name');
       var favicon = this.getAttribute('data-favicon');
+      var sortOrder = this.getAttribute('data-sort-order') || '0';
       var form = document.getElementById('category-form');
       form.action = '?controller=category&action=update&id=' + id;
       document.getElementById('cat_id').value = id;
       document.getElementById('cat_name').value = name;
+      document.getElementById('cat_sort_order').value = sortOrder;
       document.getElementById('cat_favicon').value = '';
       var currentFavicon = document.getElementById('current-favicon');
       if (favicon) {
@@ -234,6 +247,7 @@ $formAction = '?controller=project&action=list' . ($editing ? '&edit_id=' . $edi
     form.action = '?controller=category&action=create';
     document.getElementById('cat_id').value = '';
     document.getElementById('cat_name').value = '';
+    document.getElementById('cat_sort_order').value = '0';
     document.getElementById('cat_favicon').value = '';
     document.getElementById('current-favicon').innerHTML = '';
     document.getElementById('current-favicon').style.display = 'none';

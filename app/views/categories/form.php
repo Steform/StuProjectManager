@@ -17,6 +17,11 @@ $formAction = $editing ? '?controller=category&action=update&id=' . $category['i
         <div class="invalid-feedback">Category name is required (2-100 characters).</div>
     </div>
     <div class="mb-3">
+        <label for="cat_sort_order" class="form-label">Display order</label>
+        <input type="number" class="form-control" id="cat_sort_order" name="cat_sort_order" min="0" value="<?= htmlspecialchars($category['sort_order'] ?? 0, ENT_QUOTES, 'UTF-8') ?>">
+        <small class="form-text text-muted">Lower numbers appear first in tabs (0 = first position)</small>
+    </div>
+    <div class="mb-3">
         <label for="cat_favicon" class="form-label">Favicon</label>
         <input type="file" class="form-control" id="cat_favicon" name="cat_favicon">
         <?php if (!empty($category['favicon'])): ?>

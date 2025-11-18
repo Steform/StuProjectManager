@@ -62,9 +62,22 @@ class Database {
         $db->exec('CREATE TABLE IF NOT EXISTS category (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT NOT NULL,
-            favicon TEXT
+            favicon TEXT,
+            sort_order INTEGER DEFAULT 0
         )');
         self::logMigration('Ensured category table exists.');
+        
+        // 1.1. Add sort_order column if it doesn't exist (migration for existing databases)
+        try {
+            $db->exec('ALTER TABLE category ADD COLUMN sort_order INTEGER DEFAULT 0');
+            self::logMigration('Added sort_order column to category table.');
+        } catch (Exception $e) {
+            // Column already exists, ignore
+        }
+        
+        // 1.2. Initialize sort_order for existing categories without it
+        $db->exec('UPDATE category SET sort_order = id WHERE sort_order IS NULL');
+        self::logMigration('Initialized sort_order for existing categories.');
 
         // 2. Ensure 'projects' table exists
         $db->exec('CREATE TABLE IF NOT EXISTS projects (
@@ -74,9 +87,22 @@ class Database {
             description TEXT,
             favicon TEXT,
             category_id INTEGER,
+            sort_order INTEGER DEFAULT 0,
             FOREIGN KEY (category_id) REFERENCES category(id) ON DELETE RESTRICT
         )');
         self::logMigration('Ensured projects table exists.');
+        
+        // 2.1. Add sort_order column if it doesn't exist (migration for existing databases)
+        try {
+            $db->exec('ALTER TABLE projects ADD COLUMN sort_order INTEGER DEFAULT 0');
+            self::logMigration('Added sort_order column to projects table.');
+        } catch (Exception $e) {
+            // Column already exists, ignore
+        }
+        
+        // 2.2. Initialize sort_order for existing projects without it
+        $db->exec('UPDATE projects SET sort_order = id WHERE sort_order IS NULL');
+        self::logMigration('Initialized sort_order for existing projects.');
 
         // 3. Insert default category if not present
         $defaultCat = $db->querySingle("SELECT id FROM category WHERE name = 'Dev Env'");
