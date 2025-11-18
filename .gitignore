@@ -1,18 +1,32 @@
-# Ignore the favicon folder
-/favicon/
-
 # Ignore the SQLite database file
 projects.db
+projects-*.db
+
+# Ignore category and project favicons/logos (keep only default favicon.png)
+public/favicon/*
+!public/favicon/favicon.png
+!public/favicon/.gitignore
+
+# Ignore favicon backup folders
+public/favicon-*/
+
+# Ignore temporary files and cache (jet files, PHP temp files, etc.)
+*.jet
+*.tmp
+*.cache
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
 
 # Ignore the Doxygen generated documentation
 docs/html/
 docs/latex/
+
+# Logs
 logs/
+*.log
+
+# Vendor dependencies
 vendor/
-
-# Sauvegardes favicons
-public/favicon-*/*.*
-!public/favicon/favicon.png
-
-# Sauvegardes bases SQLite
-projects-*.db
